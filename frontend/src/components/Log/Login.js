@@ -29,8 +29,8 @@ const Login = () => {
           sessionStorage.setItem("admin", res.data.isAdmin);
         }
       })
-      .catch((err) => {
-        err.json({ err });
+      .catch((error) => {
+        error.json({ error });
       });
   };
 

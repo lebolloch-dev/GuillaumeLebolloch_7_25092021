@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AdminContext, UidContext } from "../AppContext";
 import axios from "axios";
 import { timestampParser } from "../Utils";
+import Swal from "sweetalert2";
 
 const CardComment = ({ post }) => {
   const uid = useContext(UidContext);
@@ -10,14 +11,12 @@ const CardComment = ({ post }) => {
   const [commentList, setCommentList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const PostId = post.id;
-  const [commentId, setCommentId] = useState("");
 
-  console.log(message);
   useEffect(() => {
     const getComment = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:5000/api/comment/${post.id}`,
+        url: `http://localhost:5000/api/comment/${PostId}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },
@@ -54,26 +53,35 @@ const CardComment = ({ post }) => {
   };
 
   const deleteComment = async (id) => {
-    if (window.confirm("Vous allez supprimer ce commentaire définitivement")) {
-      await axios({
-        method: "delete",
-        url: `http://localhost:5000/api/comment/${id}`,
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
-        },
-      }).then(() => {
-        setMessage("");
-        if (isLoaded) {
-          setIsLoaded(false);
-        } else {
-          setIsLoaded(true);
-        }
-      });
-    }
+    await Swal.fire({
+      title: "Etes vous sûr?",
+      text: "Vous allez supprimer ce commentaire définitivement!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ok !",
+      cancelButtonText: "Annuler",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Supprimé", "votre commentaire a été supprimé", "success");
+        axios({
+          method: "delete",
+          url: `http://localhost:5000/api/comment/${id}`,
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+          },
+        }).then(() => {
+          setMessage("");
+          if (isLoaded) {
+            setIsLoaded(false);
+          } else {
+            setIsLoaded(true);
+          }
+        });
+      }
+    });
   };
-
-  // console.log(commentList);
-  // console.log(post);
 
   return (
     <div className="comments-container">
@@ -87,7 +95,6 @@ const CardComment = ({ post }) => {
             }
             key={comment.id}
           >
-            {console.log(comment)}
             <img src={comment.User.photo} alt="photo de profil" />
             <div className="right-comment">
               <div className="header-comment">

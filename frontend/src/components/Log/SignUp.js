@@ -32,41 +32,36 @@ const SignUp = () => {
           email,
           password,
         })
-        .then((res) => {
-          if (res.data.error) {
-            if (res.data.error.length === 3) {
-              emailError.innerHTML = res.data.error[0].message;
-              passwordError.innerHTML = res.data.error[1].message;
-              pseudoError.innerHTML = res.data.error[2].message;
-            }
-            if (res.data.error.length === 2) {
-              if (res.data.error[0].path == "email") {
-                emailError.innerHTML = res.data.error[0].message;
-                if (res.data.error[1].path == "password") {
-                  passwordError.innerHTML = res.data.error[1].message;
-                } else {
-                  pseudoError.innerHTML = res.data.error[1].message;
-                }
-              } else if (res.dataerror[0].path == "password") {
-                passwordError.innerHTML = res.data.error[0].message;
-                pseudoError.innerHTML = res.data.error[1].message;
-              }
-            } else {
-              if (res.data.error[0].path == "email") {
-                emailError.innerHTML = res.data.error[0].message;
-              } else if (res.data.error[0].path == "password") {
-                passwordError.innerHTML = res.data.error[0].message;
-              } else if (res.data.error[0].path == "pseudo") {
-                pseudoError.innerHTML = res.data.error[0].message;
-              }
-            }
-          } else {
-            setFormSubmit(true);
-          }
+        .then(() => {
+          setFormSubmit(true);
         })
         .catch((err) => {
-          // Object.keys(err.response).forEach((prop) => console.log(prop));
-          // console.log(err.response.data);
+          if (err.response.data.error.length === 3) {
+            emailError.innerHTML = err.response.data.error[0].message;
+            passwordError.innerHTML = err.response.data.error[1].message;
+            pseudoError.innerHTML = err.response.data.error[2].message;
+          }
+          if (err.response.data.error.length === 2) {
+            if (err.response.data.error[0].path == "email") {
+              emailError.innerHTML = err.response.data.error[0].message;
+              if (err.response.data.error[1].path == "password") {
+                passwordError.innerHTML = err.response.data.error[1].message;
+              } else {
+                pseudoError.innerHTML = err.response.data.error[1].message;
+              }
+            } else if (err.response.data.error[0].path == "password") {
+              passwordError.innerHTML = err.response.data.error[0].message;
+              pseudoError.innerHTML = err.response.data.error[1].message;
+            }
+          } else {
+            if (err.response.data.error[0].path == "email") {
+              emailError.innerHTML = err.response.data.error[0].message;
+            } else if (err.response.data.error[0].path == "password") {
+              passwordError.innerHTML = err.response.data.error[0].message;
+            } else if (err.response.data.error[0].path == "pseudo") {
+              pseudoError.innerHTML = err.response.data.error[0].message;
+            }
+          }
         });
     }
   };

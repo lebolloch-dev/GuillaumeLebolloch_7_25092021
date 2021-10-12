@@ -12,7 +12,6 @@ const NewPost = () => {
   const [pseudo, setPseudo] = useState("");
   const [photoUser, setPhotoUser] = useState("");
   const uid = useContext(UidContext);
-  // let history = useHistory();
 
   const handlePost = () => {
     if (message || picture || video) {
@@ -30,8 +29,6 @@ const NewPost = () => {
         })
         .then(() => {
           window.location.reload();
-          // history.push("/");
-          // history.push("/");
           cancelPost();
         });
     } else {
@@ -90,7 +87,7 @@ const NewPost = () => {
   return (
     <div className="post-container">
       <div className="post-header">
-        <NavLink exact to="/profil">
+        <NavLink exact to="/profil" title="page profil">
           <img src={photoUser} alt="photo de profil" />
         </NavLink>
       </div>
@@ -139,6 +136,7 @@ const NewPost = () => {
               name="file"
               accept=".png, .jpg, .jpeg"
               onChange={(e) => handlePicture(e)}
+              title="ajouter une photo"
             />
           </div>
         )}

@@ -4,6 +4,7 @@ import { AdminContext, UidContext } from "../AppContext";
 import LeftNav from "../LeftNav";
 import { dateParser2 } from "../Utils";
 import WallUser from "./WallUser";
+import Swal from "sweetalert2";
 
 const UpdateProfil = () => {
   const [infoUser, setInfoUser] = useState("");
@@ -25,7 +26,6 @@ const UpdateProfil = () => {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },
       }).then((res) => {
-        // console.log(res);
         setInfoUser(res.data);
       });
     };
@@ -37,7 +37,6 @@ const UpdateProfil = () => {
     setFile(e.target.files[0]);
   };
 
-  console.log(infoUser);
   const handleEdit = () => {
     if (bio || picture) {
       const data = new FormData();
@@ -71,26 +70,44 @@ const UpdateProfil = () => {
 
   const deleteUser = async (e) => {
     e.preventDefault();
-    if (window.confirm("Vous allez supprimer ce compte définitivement")) {
-      if (
-        window.confirm(
-          "j'insiste, mais êtes vous sûr de vouloir supprimer ce compte???"
-        )
-      ) {
-        await axios({
-          method: "delete",
-          url: `http://localhost:5000/api/user/${uid}`,
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
-          },
-        }).then(() => {
-          sessionStorage.removeItem("authToken");
-          sessionStorage.removeItem("userID");
-          sessionStorage.removeItem("pseudo");
-          window.location = "/profil";
+    await Swal.fire({
+      title: "Etes vous sûr?",
+      text: "Vous allez supprimer ce compte définitivement !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ok !",
+      cancelButtonText: "Annuler",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "J'insiste",
+          text: "Vous allez vraiment supprimer ce compte définitivement !",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ok !",
+          cancelButtonText: "Annuler",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios({
+              method: "delete",
+              url: `http://localhost:5000/api/user/${uid}`,
+              headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+              },
+            }).then(() => {
+              sessionStorage.removeItem("authToken");
+              sessionStorage.removeItem("userID");
+              sessionStorage.removeItem("pseudo");
+              window.location = "/profil";
+            });
+          }
         });
       }
-    }
+    });
   };
 
   const cancelPost = () => {
@@ -98,8 +115,6 @@ const UpdateProfil = () => {
     setPicture("");
     setFile("");
   };
-
-  console.log(infoUser);
 
   return (
     <div className="profil-container">
@@ -128,7 +143,6 @@ const UpdateProfil = () => {
           <div className="email-birth">
             <i class="fas fa-at"></i>
             <p>{infoUser.email} </p>
-            {/* <a href="mailto:`${}`{infoUser.email}">Contactez-moi !</a> */}
           </div>
           <div className="email-birth">
             <i class="fas fa-calendar-alt"></i>

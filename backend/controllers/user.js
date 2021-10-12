@@ -22,35 +22,10 @@ exports.signup = (req, res, next) => {
         isAdmin: verifyAdmin,
       })
         .then(() => res.status(201).json({ message: "utilisateur créé !" }))
-        .catch((error) => {
-          // console.log("************ERROR INSERT************");
-          // console.log(error);
-          // let customMsg = ;
-          // if(error.errors)
-          //   customMsg.message = `Blabla</Bl>a $path`
-          res.status(400).json(error);
-        });
+        .catch((error) => res.status(400).json({ error }));
     });
   } else {
-    // Ici il faut prendre le message d'erreur de Joi et le modifier pour le rendre plus utilisable par ton front
-    // Exemple: mettre un code d'erreur
-    /*
-      {
-        errors: {
-          username: {
-            msg: 'Blablabla'
-          },
-          password: {
-            msg: 'Blablabla'
-          }
-        }
-      }
-    */
-    // resultSchema.error.details.map(e => {
-
-    // });
-    //***CONDITION SI LE MAIL, PASSWORD ET/OU LE PSEUDO NE CORRESPOND PAS AU SCHEMA DE VALIDATION JOI
-    res.json({ error: resultSchema.error.details }).status(402);
+    res.status(402).json({ error: resultSchema.error.details });
   }
 };
 
@@ -94,9 +69,7 @@ exports.me = (req, res, next) => {
       },
     ],
   })
-    .then((me) => {
-      res.status(200).json(me);
-    })
+    .then((me) => res.status(200).json(me))
     .catch((error) => res.status(404).json({ error }));
 };
 

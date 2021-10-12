@@ -7,7 +7,6 @@ module.exports = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
     const userId = decodedToken.id;
     const admin = decodedToken.isAdmin;
-    // console.log("req.body :", req.body);
 
     if (!admin) {
       if (req.body.id && req.body.id !== userId) {

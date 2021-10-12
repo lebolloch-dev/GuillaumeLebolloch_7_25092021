@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { UidContext } from "../AppContext";
 import Card from "./Card";
 
 const WallPost = () => {
   const [postsList, setPostsList] = useState([]);
-  const uid = useContext(UidContext);
 
   useEffect(() => {
     const getAllPost = async () => {
@@ -17,8 +15,6 @@ const WallPost = () => {
         },
       }).then((res) => {
         setPostsList(res.data.reverse());
-
-        // console.log(res.data.reverse());
       });
     };
     getAllPost();

@@ -3,38 +3,17 @@ import { AdminContext, UidContext } from "../AppContext";
 import CardComment from "./CardComment";
 import LikeButton from "./LikeButton";
 import DeleteButton from "./DeleteButton";
+import { dateParser } from "../Utils";
 
 const Card = ({ post }) => {
   const uid = useContext(UidContext);
   const admin = useContext(AdminContext);
   const [showComment, setShowComment] = useState(false);
   const [commentLength, setCommentLength] = useState("");
-  const dateParser = (num) => {
-    let options = {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      weekday: "long",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-
-    let timestamp = Date.parse(num);
-
-    let date = new Date(timestamp).toLocaleDateString("fr-FR", options);
-
-    return date.toString();
-  };
-
-  console.log(admin);
 
   useEffect(() => {
     setCommentLength(post.Comments.length);
   }, [showComment, commentLength]);
-
-  // console.log(post);
-  // console.log(uid);
 
   return (
     <li className="card-container" key={post.id}>
@@ -54,9 +33,7 @@ const Card = ({ post }) => {
         <div className="card-main">
           <p>{post.message}</p>
           {post.picture && (
-            // <div className="image-container">
             <img src={post.picture} alt="photo du post" className="card-pic" />
-            // </div>
           )}
           {post.video && (
             <iframe
@@ -79,7 +56,6 @@ const Card = ({ post }) => {
             <span>{commentLength}</span>
           </div>
           <LikeButton post={post} />
-          {/* <i class="fas fa-external-link-alt"></i> */}
           {uid == post.User.id || admin == 1 ? (
             <DeleteButton post={post} />
           ) : null}
@@ -91,10 +67,3 @@ const Card = ({ post }) => {
 };
 
 export default Card;
-
-{
-  /* <div className="comment-icon">
-  <i class="far fa-comment"></i>
-  <span>5</span>
-</div>; */
-}

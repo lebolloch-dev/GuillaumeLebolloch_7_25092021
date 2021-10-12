@@ -3,9 +3,6 @@ const { User } = require("../models");
 const { Like } = require("../models");
 const { Comment } = require("../models");
 
-const fs = require("fs");
-const sequelize = require("sequelize");
-
 exports.getAllPost = (req, res, next) => {
   Post.findAll({
     include: [
@@ -19,7 +16,6 @@ exports.getAllPost = (req, res, next) => {
       },
       {
         model: Like,
-        // attributes: "UserId",
       },
     ],
   })
@@ -28,7 +24,6 @@ exports.getAllPost = (req, res, next) => {
 };
 
 exports.createPost = (req, res, next) => {
-  console.log(req.file);
   const test = req.file;
 
   if (test == null) {
@@ -55,18 +50,10 @@ exports.createPost = (req, res, next) => {
       )
       .catch((error) => res.status(500).json({ error }));
   }
-
-  console.log(req.body);
 };
 
 exports.deletePost = (req, res, next) => {
-  console.log("***********************************", req);
   Post.destroy({ where: { id: req.params.id } })
     .then(() => res.status(200).json({ message: "post suprrimé" }))
     .catch((error) => res.status(400).json({ error }));
 };
-//YOUTUBE VIDEO
-// var url = url.replace("watch?v=", "v/");
-// `${req.protocol}://${req.get("host")}/images/${req.body.file}`
-// ...postObject,
-//     picture: `${req.protocol}://${req.get("host")}/images/${req.body.picture}`,

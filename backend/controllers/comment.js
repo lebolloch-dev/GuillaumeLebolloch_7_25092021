@@ -1,5 +1,4 @@
 const { User } = require("../models");
-const { Post } = require("../models");
 const { Comment } = require("../models");
 
 exports.getAllComment = async (req, res, next) => {
@@ -27,5 +26,5 @@ exports.createComment = (req, res) => {
 exports.deleteComment = async (req, res, next) => {
   await Comment.destroy({ where: { id: req.params.id } })
     .then(() => res.status(200).json({ message: "commentaire suprrimé" }))
-    .catch((error) => res.status(400).json({ error: "ses grand mort" }));
+    .catch((error) => res.status(400).json({ error }));
 };

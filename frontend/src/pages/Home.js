@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { UidContext } from "../components/AppContext";
 import LeftNav from "../components/LeftNav";
 import NewPost from "../components/Post/NewPost";
-import axios from "axios";
 import WallPost from "../components/Post/WallPost";
 import { Redirect } from "react-router";
 
@@ -21,8 +20,8 @@ const Home = () => {
           </div>
         </div>
       ) : (
-        <Redirect to="/profil" />
-        // <h1>rr</h1>
+        // <Redirect to="/profil" />
+        <h1>rr</h1>
       )}
     </div>
   );

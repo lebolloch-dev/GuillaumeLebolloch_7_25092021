@@ -47,8 +47,6 @@ const WallUser = () => {
     }
   };
 
-  console.log(userList);
-
   return (
     <div className="allUser-container">
       <h2>Liste des utilisateurs inscrit sur Groupomania</h2>

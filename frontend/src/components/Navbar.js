@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { AdminContext, UidContext } from "./AppContext";
+import { UidContext } from "./AppContext";
 import Logout from "./Log/Logout";
 
 const Navbar = () => {
   const uid = useContext(UidContext);
-  const admin = useContext(AdminContext);
   const [pseudo, setPseudo] = useState("");
   useEffect(() => {
     setPseudo(sessionStorage.getItem("pseudo"));
@@ -17,7 +16,7 @@ const Navbar = () => {
         {uid ? (
           <>
             <div className="logo">
-              <NavLink exact to="/">
+              <NavLink exact to="/" title="page d'acceuil">
                 <div className="logo">
                   <img
                     className="world-icon"
@@ -36,7 +35,7 @@ const Navbar = () => {
             <div>
               <ul>
                 <li className="welcome">
-                  <NavLink exact to="/profil">
+                  <NavLink exact to="/profil" title="page profil">
                     <p>
                       Bienvenue <b>{pseudo}</b>
                     </p>

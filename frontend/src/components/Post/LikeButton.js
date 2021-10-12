@@ -3,9 +3,7 @@ import { UidContext } from "../AppContext";
 import axios from "axios";
 
 const LikeButton = ({ post }) => {
-  const [liked, setLiked] = useState(false);
   const uid = useContext(UidContext);
-  const [likeList, setLikeList] = useState([]);
   const [likeCounter, setLikeCounter] = useState("");
   const UserId = uid;
   const PostId = post.id;
@@ -36,8 +34,7 @@ const LikeButton = ({ post }) => {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
       },
-    }).then((res) => {
-      //   console.log(res);
+    }).then(() => {
       const likeMap = post.Likes.map((value) => {
         return value.UserId;
       });
@@ -46,18 +43,11 @@ const LikeButton = ({ post }) => {
       } else {
         setIsLoaded(true);
       }
-      if (likeMap.includes(JSON.parse([uid]))) {
-        setLiked(true);
-      } else {
-        setLiked(false);
-      }
     });
   };
 
   return (
     <div className="like-container">
-      {/* {liked === false && <i class="far fa-heart" onClick={likePost}></i>}
-      {liked && <i class="fas fa-heart" onClick={likePost}></i>} */}
       <i class="far fa-heart" onClick={likePost}></i>
       <span>{likeCounter}</span>
     </div>
