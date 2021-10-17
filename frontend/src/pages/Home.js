@@ -5,6 +5,7 @@ import NewPost from "../components/Post/NewPost";
 import WallPost from "../components/Post/WallPost";
 import { Redirect } from "react-router";
 
+// AFFICHAGE DE LA PAGE HOME AVEC DIFFERENTE CONDITION (SI L'UTILISATEUR EST CONNECTE OU NON)
 const Home = () => {
   const uid = useContext(UidContext);
   return (

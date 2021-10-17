@@ -6,6 +6,7 @@ const Log = () => {
   const [signUpModal, setSignUpModal] = useState(false);
   const [logInModal, setLogInModal] = useState(true);
 
+  // FONCTION POUR AFFICHER DYNAMIQUEMENT LE COMPONENT LOGIN OU SIGNUP
   const handleModals = (e) => {
     if (e.target.id === "signup") {
       setSignUpModal(true);

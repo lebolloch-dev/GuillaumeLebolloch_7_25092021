@@ -5,14 +5,14 @@
   position: relative;
   background: rgba($color: #3999c4, $alpha: 0.2);
 
-  @media screen and(max-width: 375px) {
+  @media screen and(max-width: 414px) {
     padding: 8px 10px;
   }
 
   .post-header {
     margin-bottom: 10px;
     text-align: center;
-    @media screen and(max-width: 375px) {
+    @media screen and(max-width: 414px) {
       text-align: left;
     }
 
@@ -33,14 +33,14 @@
       width: 100%;
       font-size: 1.4em;
       padding: 12px 15px;
-      @media screen and(max-width: 375px) {
+      @media screen and(max-width: 414px) {
         font-size: 1em;
       }
     }
     .card-container {
       background: white;
 
-      @media screen and(max-width: 375px) {
+      @media screen and(max-width: 414px) {
         max-height: 350px;
       }
 
@@ -56,7 +56,7 @@
           display: flex;
           flex-direction: column;
           padding: 6px 0;
-          @media screen and(max-width: 375px) {
+          @media screen and(max-width: 414px) {
             overflow: auto;
             flex-direction: row;
           }
@@ -69,7 +69,7 @@
             width: 60%;
             border-radius: 6px;
             margin-top: 12px;
-            @media screen and(max-width: 375px) {
+            @media screen and(max-width: 414px) {
               width: 100%;
             }
           }
@@ -77,7 +77,7 @@
             width: 60%;
             min-height: 330px;
             border-radius: 6px;
-            @media screen and(max-width: 375px) {
+            @media screen and(max-width: 414px) {
               width: 100%;
               min-height: 200px;
             }

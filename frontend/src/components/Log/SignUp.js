@@ -10,6 +10,7 @@ const SignUp = () => {
   const [controlPassword, setControlPassword] = useState("");
 
   const handleSignUp = async (e) => {
+    //FONCTION QUI PERMET LA CREATION D'UN UTILISATEUR ET L'ENVOI A LA BASE DE DONNEE SQL GRACE A L'APPEL API AXIOS DU BACKEND : SIGNUP
     e.preventDefault();
 
     const pseudoError = document.querySelector(".pseudo.error");
@@ -36,12 +37,12 @@ const SignUp = () => {
           setFormSubmit(true);
         })
         .catch((err) => {
-          if (err.response.data.error.length === 3) {
+          if (err.response.data.error.length == 3) {
             emailError.innerHTML = err.response.data.error[0].message;
             passwordError.innerHTML = err.response.data.error[1].message;
             pseudoError.innerHTML = err.response.data.error[2].message;
           }
-          if (err.response.data.error.length === 2) {
+          if (err.response.data.error.length == 2) {
             if (err.response.data.error[0].path == "email") {
               emailError.innerHTML = err.response.data.error[0].message;
               if (err.response.data.error[1].path == "password") {
@@ -108,6 +109,7 @@ const SignUp = () => {
             id="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            autoComplete="true"
           />
           <div className="password error"></div>
           <br />
@@ -115,7 +117,7 @@ const SignUp = () => {
           <br />
           <input
             type="password"
-            name="password"
+            name="password-conf"
             id="password-conf"
             onChange={(e) => setControlPassword(e.target.value)}
             value={controlPassword}

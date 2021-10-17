@@ -2,10 +2,12 @@ import React from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+// BOUTOTN SUPPRESSION DE POST
 const DeleteButton = ({ post }) => {
   const id = post.id;
 
   const deletePost = async (e) => {
+    // SUPPRESSION D'UN POST DANS LA DB SQL
     e.preventDefault();
 
     await Swal.fire({

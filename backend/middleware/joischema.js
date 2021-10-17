@@ -1,5 +1,6 @@
 const joi = require("joi");
 
+//SCHEMA JOI QUI PERMET DE VERIFIER L'EMAIL, LE PASSWORD ET LE PSEUDO DE L'UTILISATEUR
 module.exports = joi
   .object()
   .keys({

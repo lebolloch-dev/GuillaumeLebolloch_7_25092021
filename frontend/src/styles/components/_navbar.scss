@@ -31,7 +31,7 @@ nav {
         display: flex;
         height: 30px;
         margin-left: 4px;
-        @media screen and(max-width: 375px) {
+        @media screen and(max-width: 414px) {
           display: none;
         }
       }
@@ -59,7 +59,7 @@ nav {
       justify-content: space-between;
       font-size: 1.3rem;
 
-      @media screen and(max-width: 375px) {
+      @media screen and(max-width: 414px) {
         width: 275px;
       }
 
@@ -71,7 +71,7 @@ nav {
           p {
             font-size: 1.2em;
 
-            @media screen and(max-width: 375px) {
+            @media screen and(max-width: 414px) {
               font-size: 1em;
             }
             span {

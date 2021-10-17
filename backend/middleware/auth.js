@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+//MIDDLEWARE POUR L'AUTENTIFICATION ET LA VALIDATION DE L'UTILISATEUR OU D'UN ADMINISTRATEUR
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];

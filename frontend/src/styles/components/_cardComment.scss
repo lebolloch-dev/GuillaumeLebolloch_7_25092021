@@ -1,5 +1,5 @@
 .comments-container {
-  @media screen and(max-width: 375px) {
+  @media screen and(max-width: 414px) {
     margin-top: 8px;
     margin-left: -63px;
   }
@@ -28,7 +28,7 @@
       .header-comment {
         display: flex;
         justify-content: space-between;
-        @media screen and(max-width: 375px) {
+        @media screen and(max-width: 414px) {
           flex-direction: column;
         }
 

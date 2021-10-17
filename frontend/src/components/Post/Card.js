@@ -3,9 +3,13 @@ import { AdminContext, UidContext } from "../AppContext";
 import CardComment from "./CardComment";
 import LikeButton from "./LikeButton";
 import DeleteButton from "./DeleteButton";
-import { dateParser } from "../Utils";
+import Moment from "react-moment";
+import "moment/locale/fr";
+import { Link } from "react-router-dom";
 
+// AFFICHAGE D'UN POST
 const Card = ({ post }) => {
+  // RECUPERATION DES INFO DANS LE PROPS POST ET AFFICHAGE DYNAMIQUE DES DIFFERENTES INFORMATIONS
   const uid = useContext(UidContext);
   const admin = useContext(AdminContext);
   const [showComment, setShowComment] = useState(false);
@@ -18,7 +22,9 @@ const Card = ({ post }) => {
   return (
     <li className="card-container" key={post.id}>
       <div className="card-left">
-        <img src={post.User.photo} alt="" />
+        <Link exact to={`/profil/${post.User.id}`}>
+          <img src={post.User.photo} alt="" />
+        </Link>
       </div>
       <div className="card-right">
         <div className="card-header">
@@ -28,7 +34,12 @@ const Card = ({ post }) => {
             <h2>{post.User.pseudo} </h2>
           )}
 
-          <span>{dateParser(post.updatedAt)} </span>
+          <span>
+            <p>Il y a </p>
+            <Moment fromNow ago>
+              {post.updatedAt}
+            </Moment>
+          </span>
         </div>
         <div className="card-main">
           <p>{post.message}</p>

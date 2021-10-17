@@ -1,5 +1,9 @@
-const { Like } = require("../models");
+const { Like, sequelize } = require("../models");
+const { Post } = require("../models");
+const { User } = require("../models");
+const { QueryTypes } = require("sequelize");
 
+// CREATION OU SUPPRESSION D'UN LIKE
 exports.like = async (req, res, next) => {
   const { PostId } = req.body;
   const { UserId } = req.body;
@@ -23,8 +27,23 @@ exports.like = async (req, res, next) => {
     .catch((error) => res.status(404).json({ error }));
 };
 
+// RECUPERATION DU COMPTEUR DE LIKE D'UN POST
 exports.likeCounter = async (req, res, next) => {
   await Like.findAll({ where: { PostId: req.params.id } })
     .then((like) => res.status(200).json({ like: like.length }))
+    .catch((error) => res.status(404).json({ error }));
+};
+
+// RECUPERATION DES POSTS LIKER PAR UN USER
+exports.getLikeUserId = async (req, res, next) => {
+  await sequelize
+    .query(
+      "SELECT u.id as user,l.id as like_id,p.message,p.id,p.picture,p.video,p.updatedAt,u.photo, u.pseudo FROM groupomania.likes as l INNER JOIN groupomania.posts as p ON l.PostId=p.id INNER JOIN groupomania.users as u ON u.id=p.UserId WHERE l.UserId=?",
+      {
+        replacements: [req.params.id],
+        type: QueryTypes.SELECT,
+      }
+    )
+    .then((like) => res.status(200).json(like))
     .catch((error) => res.status(404).json({ error }));
 };

@@ -12,27 +12,18 @@ const commentRoutes = require("./routes/comment");
 
 const app = express();
 
+//MODULE C.O.R.S
 app.use(cors());
-
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-//   );
-//   res.header(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-//   );
-//   next();
-// });
 
 app.use(express.urlencoded({ extended: true }));
 
+//TRANSFORMER LE CORPS DE LA REQUÉTE EN json
 app.use(express.json());
 
+//MODULE DE SÉCURITÉ D'EN-TÊTE HTTP
 app.use(helmet());
 
+//CONNEXION A LA BASE DE DONNÉ SQL
 db.sequelize.sync();
 
 const dbTestConnexion = async function () {
@@ -45,14 +36,21 @@ const dbTestConnexion = async function () {
 };
 dbTestConnexion();
 
+//DIFFERENTES ROUTES
+
+// IMAGE
 app.use("/images", express.static(path.join(__dirname, "images")));
 
+// USER
 app.use("/api/user", userRoutes);
 
+// POST
 app.use("/api/post", postRoutes);
 
+// LIKE
 app.use("/api/like", likeRoutes);
 
+// COMMENT
 app.use("/api/comment", commentRoutes);
 
 module.exports = app;

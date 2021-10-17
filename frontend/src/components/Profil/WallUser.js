@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { timestampParser } from "../Utils";
 
+// AFFICHAGE D'UN MUR AVEC TOUT LES UTILISATEURS ENREGISTRE DANS LA DB SQL, POUR QUE L'ADMINISTRATEUR PUISSE LES SUPPRIMER
 const WallUser = () => {
   const [userList, setUserList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    // RECUPERATIONS DES INFORMATIONS GRACE A UN APPEL API AXIOS DANS LE BACKEND : getAllUser
     const getUsers = async () => {
       await axios({
         method: "get",
@@ -22,7 +24,7 @@ const WallUser = () => {
   }, [isLoaded]);
 
   const deleteOneUser = (userId) => {
-    // e.preventdefault();
+    // SUPPRESSION D'UN UTILISATEUR DANS LA DB SQL GRACE A UN APPEL API AXIOS DANS LE BACKEND: deleteUser
 
     if (window.confirm("Vous allez supprimer cet utilisateur")) {
       if (

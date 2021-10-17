@@ -1,6 +1,7 @@
 const { User } = require("../models");
 const { Comment } = require("../models");
 
+// RECUPERATION DE TOUT LES COMMENTAIRES
 exports.getAllComment = async (req, res, next) => {
   await Comment.findAll({
     where: { PostId: req.params.id },
@@ -13,6 +14,7 @@ exports.getAllComment = async (req, res, next) => {
     .catch((error) => res.status(404).json({ error }));
 };
 
+// CREATION D'UN COMMENTAIRE
 exports.createComment = (req, res) => {
   Comment.create({
     UserId: req.body.UserId,
@@ -23,6 +25,7 @@ exports.createComment = (req, res) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
+// SUPPRESSION D'UN COMMENTAIRE
 exports.deleteComment = async (req, res, next) => {
   await Comment.destroy({ where: { id: req.params.id } })
     .then(() => res.status(200).json({ message: "commentaire suprrimé" }))

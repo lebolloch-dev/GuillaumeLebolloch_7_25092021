@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UidContext } from "../AppContext";
 import { timestampParser } from "../Utils";
 
+//SECTION NOUVEAU POST
 const NewPost = () => {
   const [message, setMessage] = useState("");
   const [picture, setPicture] = useState("");
@@ -14,6 +15,7 @@ const NewPost = () => {
   const uid = useContext(UidContext);
 
   const handlePost = () => {
+    // ENVOI DU NOUVEAU POST DANS LA DB SQL GRACE A UN APPEL API AXIOS DANS LE BACKEND: createPost
     if (message || picture || video) {
       const data = new FormData();
       data.append("UserId", uid);
@@ -37,6 +39,7 @@ const NewPost = () => {
   };
 
   useEffect(() => {
+    // RECUPERATION DES INFO D'UN USER GRACE A L'APPEL API AXIOS DANS LE BACKEND: me
     const getUser = async () => {
       await axios({
         method: "get",
@@ -53,12 +56,14 @@ const NewPost = () => {
   }, [uid]);
 
   const handlePicture = (e) => {
+    // RECUPERRATION DES INFORMATION DE L'IMAGE A ENVOYER DANS LA DB SQL
     setPicture(URL.createObjectURL(e.target.files[0]));
     setFile(e.target.files[0]);
     setVideo("");
   };
 
   const handleVideo = () => {
+    // RECUPERATION ET MODIFICATION DE L'URL DE LA VIDEO YOUTUBE POUR UN AFFICHAGE ET L'ENVOI A LA DB SQL
     let findLink = message.split(" ");
     for (let i = 0; i < findLink.length; i++) {
       if (
@@ -74,6 +79,7 @@ const NewPost = () => {
   };
 
   const cancelPost = () => {
+    // ANNULATION DU NOUVEAU POST
     setMessage("");
     setPicture("");
     setVideo("");
@@ -87,9 +93,9 @@ const NewPost = () => {
   return (
     <div className="post-container">
       <div className="post-header">
-        <NavLink exact to="/profil" title="page profil">
+        <Link to={`/profil/${uid}`}>
           <img src={photoUser} alt="photo de profil" />
-        </NavLink>
+        </Link>
       </div>
       <div className="post-main">
         <textarea

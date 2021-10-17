@@ -6,7 +6,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 16px;
-      @media screen and(max-width: 375px) {
+      @media screen and(max-width: 414px) {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -21,7 +21,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        @media screen and(max-width: 375px) {
+        @media screen and(max-width: 414px) {
           align-items: flex-start;
           margin-top: 8px;
         }
@@ -61,6 +61,52 @@
         max-width: 400px;
       }
     }
+
+    ul {
+      max-width: 150px;
+      display: flex;
+      align-items: center;
+      margin-top: 50px;
+      @media screen and(max-width: 414px) {
+        width: 100%;
+        margin-top: 16px;
+      }
+
+      #likePost {
+        padding-left: 13px;
+      }
+
+      li {
+        cursor: pointer;
+        border-radius: 10px;
+        padding: 10px 20px;
+        transition: 0.2s;
+        width: 50%;
+        font-weight: bolder;
+        margin: 5px 0px;
+
+        @media screen and(max-width: 414px) {
+          width: 80%;
+          margin: 8 auto;
+        }
+      }
+      .active-btn {
+        text-align: center;
+        background: $color-1;
+        color: $color-2;
+
+        &:hover {
+          background: $color-2;
+          color: $color-1;
+        }
+      }
+      li:not(.active-btn) {
+        &:hover {
+          // transform: translateX(3px);
+          color: $color-1;
+        }
+      }
+    }
   }
   .edit {
     margin: 16px auto;
@@ -69,7 +115,7 @@
     position: relative;
     background: rgba($color: #3999c4, $alpha: 0.2);
 
-    @media screen and(max-width: 375px) {
+    @media screen and(max-width: 414px) {
       padding: 8px 10px;
     }
 
@@ -78,7 +124,7 @@
       width: 100%;
       font-size: 1.4em;
       padding: 12px 15px;
-      @media screen and(max-width: 375px) {
+      @media screen and(max-width: 414px) {
         font-size: 1em;
       }
     }

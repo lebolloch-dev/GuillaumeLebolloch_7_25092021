@@ -7,10 +7,12 @@ const schemajoi = require("../middleware/joischema");
 require("dotenv").config();
 const fs = require("fs");
 
+//CREATION DE L'UTILISATEUR
 exports.signup = (req, res, next) => {
   const resultSchema = schemajoi.validate(req.body);
   let verifyAdmin = false;
   if (resultSchema.value.pseudo === process.env.ADMIN_SECRET) {
+    //CONDITION POUR LA CREATION D'UN COMPTE ADMINISTRATEUR
     verifyAdmin = true;
   }
   if (!resultSchema.error) {
@@ -29,6 +31,7 @@ exports.signup = (req, res, next) => {
   }
 };
 
+//CONNEXION DE L'UTILISATEUR
 exports.login = (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
     .then((user) => {
@@ -59,6 +62,7 @@ exports.login = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+// RECUPERER UN UTILISATEUR
 exports.me = (req, res, next) => {
   User.findOne({
     attributes: ["id", "email", "pseudo", "bio", "photo", "createdAt"],
@@ -73,6 +77,7 @@ exports.me = (req, res, next) => {
     .catch((error) => res.status(404).json({ error }));
 };
 
+// MODIFIER UN UTILISATEUR
 exports.editUser = (req, res, next) => {
   const test = req.file;
   if (test) {
@@ -115,6 +120,7 @@ exports.editUser = (req, res, next) => {
   }
 };
 
+// SUPPRIMER UN UTILISATEUR
 exports.deleteUser = (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
@@ -132,6 +138,7 @@ exports.deleteUser = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+// RECUPERATION DE TOUT LES UTILISATEURS
 exports.getAllUser = (req, res, next) => {
   User.findAll({
     include: [

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UidContext } from "../AppContext";
 import axios from "axios";
 
+// AFFICHAGE BOUTTON LIKE + COMPTEUR DE LIKE
 const LikeButton = ({ post }) => {
   const uid = useContext(UidContext);
   const [likeCounter, setLikeCounter] = useState("");
@@ -38,6 +39,7 @@ const LikeButton = ({ post }) => {
       const likeMap = post.Likes.map((value) => {
         return value.UserId;
       });
+
       if (isLoaded) {
         setIsLoaded(false);
       } else {

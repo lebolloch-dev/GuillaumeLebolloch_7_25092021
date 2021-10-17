@@ -3,6 +3,7 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
+      // UN USER PEUT AVOIR PLUSIEUR POST, COMMENT ET LIKE
       models.User.hasMany(models.Post);
       models.User.hasMany(models.Comment);
       models.User.hasMany(models.Like);

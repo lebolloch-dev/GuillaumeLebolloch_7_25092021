@@ -5,7 +5,11 @@ import LeftNav from "../LeftNav";
 import { dateParser2 } from "../Utils";
 import WallUser from "./WallUser";
 import Swal from "sweetalert2";
+import WallPostUserId from "./WallPostUserId";
+import WallLikeUserId from "./WallLikeUserId";
+import { useParams } from "react-router-dom";
 
+// AFFICHAGE DU PROFIL D'UN UTILISATEUR
 const UpdateProfil = () => {
   const [infoUser, setInfoUser] = useState("");
   const [showEdit, setShowEdit] = useState(false);
@@ -16,12 +20,14 @@ const UpdateProfil = () => {
 
   const uid = useContext(UidContext);
   const admin = useContext(AdminContext);
+  const { id } = useParams();
 
   useEffect(() => {
+    // RECUPERATION DES INFO D'UN USER GRACE A L'APPEL API AXIOS DANS LE BACKEND: me
     const getUser = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:5000/api/user/${uid}`,
+        url: `http://localhost:5000/api/user/${id}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },
@@ -30,14 +36,16 @@ const UpdateProfil = () => {
       });
     };
     getUser();
-  }, [uid, isLoaded]);
+  }, [id, isLoaded]);
 
   const handlePicture = (e) => {
+    // RECUPERRATION DES INFORMATION DE L'IMAGE A ENVOYER DANS LA DB SQL
     setPicture(URL.createObjectURL(e.target.files[0]));
     setFile(e.target.files[0]);
   };
 
   const handleEdit = () => {
+    // MODIFICTION DU PROFIL D'UN UTILISATEUR + ENVOI DB GRACE A L'APPEL API AXIOS DANS LE BACKEND: editUser
     if (bio || picture) {
       const data = new FormData();
       if (!bio) {
@@ -68,7 +76,22 @@ const UpdateProfil = () => {
     }
   };
 
+  const [userPostModal, setUserPostModal] = useState(true);
+  const [likePostModal, setLikePostModal] = useState(false);
+
+  const handleModals = (e) => {
+    // AFFICHAGE DYNAMIQUE DE LA SECTION POST OU LIKE DE L'UTILISATEUR
+    if (e.target.id === "userPost") {
+      setUserPostModal(true);
+      setLikePostModal(false);
+    } else if (e.target.id === "likePost") {
+      setUserPostModal(false);
+      setLikePostModal(true);
+    }
+  };
+
   const deleteUser = async (e) => {
+    // SUPPRESSIONS D'UN UTILISATEUR DANS LA DB SQL
     e.preventDefault();
     await Swal.fire({
       title: "Etes vous sûr?",
@@ -122,27 +145,38 @@ const UpdateProfil = () => {
       <div className="infoUser-main">
         <div className="infoUser-header">
           <img src={infoUser.photo} alt="photo de profil" />
-          <div className="button-edit">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setShowEdit(!showEdit);
-              }}
-            >
-              Éditer le profil
-            </button>
-            {showEdit && (
-              <button className="delet-user" onClick={deleteUser}>
-                Supprimer le compte
+          {uid === id ? (
+            <div className="button-edit">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowEdit(!showEdit);
+                }}
+              >
+                Éditer le profil
               </button>
-            )}
-          </div>
+              {showEdit && (
+                <button className="delet-user" onClick={deleteUser}>
+                  Supprimer le compte
+                </button>
+              )}
+            </div>
+          ) : null}
         </div>
         <div className="infoUser-main">
-          <h2>{infoUser.pseudo}</h2>
+          {infoUser.pseudo === "Lr4mquGt64H6pjU39N3Y" ? (
+            <h2 className="admin-pseudo">ADMIN</h2>
+          ) : (
+            <h2>{infoUser.pseudo}</h2>
+          )}
+
           <div className="email-birth">
             <i class="fas fa-at"></i>
-            <p>{infoUser.email} </p>
+            {infoUser.pseudo === "Lr4mquGt64H6pjU39N3Y" ? (
+              <p>**********</p>
+            ) : (
+              <p>{infoUser.email} </p>
+            )}
           </div>
           <div className="email-birth">
             <i class="fas fa-calendar-alt"></i>
@@ -188,7 +222,30 @@ const UpdateProfil = () => {
             </div>
           </div>
         )}
-        {admin == 1 ? <WallUser /> : null}
+        {admin == 1 ? (
+          <WallUser />
+        ) : (
+          <>
+            <ul>
+              <li
+                onClick={handleModals}
+                id="userPost"
+                className={userPostModal ? "active-btn" : null}
+              >
+                Post
+              </li>
+              <li
+                onClick={handleModals}
+                id="likePost"
+                className={likePostModal ? "active-btn" : null}
+              >
+                J'aime
+              </li>
+            </ul>
+            {userPostModal && <WallPostUserId infoUser={infoUser} />}
+            {likePostModal && <WallLikeUserId infoUser={infoUser} />}
+          </>
+        )}
       </div>
     </div>
   );

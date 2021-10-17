@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     static associate(models) {
       models.Post.belongsTo(models.User, {
+        // FONCTION QUI RELIS LE MODEL POST AU MODEL USER, MAIS AUSSI A LA SUPPRESSION EN CASCADE
         foreignKey: {
           allowNull: false,
         },

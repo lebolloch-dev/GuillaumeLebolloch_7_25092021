@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { UidContext } from "./AppContext";
 import Logout from "./Log/Logout";
 
+// HEADER QUI PERMET UNE DECONNEXION + NAVIGATION ENTRE ACCEUIL/PROFIL + AFFICHAGE DYNAMIQUE DU PSEUDO DE L'UTILISATEUR
 const Navbar = () => {
   const uid = useContext(UidContext);
   const [pseudo, setPseudo] = useState("");
@@ -35,7 +36,7 @@ const Navbar = () => {
             <div>
               <ul>
                 <li className="welcome">
-                  <NavLink exact to="/profil" title="page profil">
+                  <NavLink exact to={`/profil/${uid}`} title="page profil">
                     <p>
                       Bienvenue <b>{pseudo}</b>
                     </p>

@@ -1,7 +1,10 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { UidContext } from "./AppContext";
 
+// BARRE DE NAVIGATION LATERAL QUI PERMET D'ALLER SUR LA PAGE ACCEUIL ET PROFIL
 const LeftNav = () => {
+  const uid = useContext(UidContext);
   return (
     <div className="left-nav-container">
       <div className="icons">
@@ -17,8 +20,7 @@ const LeftNav = () => {
           </NavLink>
           <br />
           <NavLink
-            exact
-            to="/profil"
+            to={`/profil/${uid}`}
             activeClassName="active-left-nav"
             name="page profil"
             title="page profil"

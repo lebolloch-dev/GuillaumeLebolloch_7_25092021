@@ -6,6 +6,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // FONCTION QUI PERMET LA CONNEXION D'UN UTILISATEUR GRACE A UN APPEL API AXIOS AU BACKEND: LOGIN
   const handleLogin = async (e) => {
     e.preventDefault();
     const emailError = document.querySelector(".email.error");
@@ -58,6 +59,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         required="required"
+        autoComplete="true"
       />
       <br />
       <div className="password error"></div>

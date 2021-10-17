@@ -4,6 +4,7 @@ import axios from "axios";
 import { timestampParser } from "../Utils";
 import Swal from "sweetalert2";
 
+// AFFICHAGE DES COMMENTAIRE + NOUVEAU COMMENTAIRE + SUPPRESSION COMMENTAIRE D'UN POST
 const CardComment = ({ post }) => {
   const uid = useContext(UidContext);
   const admin = useContext(AdminContext);
@@ -13,6 +14,7 @@ const CardComment = ({ post }) => {
   const PostId = post.id;
 
   useEffect(() => {
+    // RECUPERATION DES COOMENTAIRES D'UN POST GRACE A L'APPEL API AXIOS DU BACEND: getAllComment
     const getComment = async () => {
       await axios({
         method: "get",
@@ -28,6 +30,7 @@ const CardComment = ({ post }) => {
   }, [isLoaded]);
 
   const handleComment = (e) => {
+    // CREATION D'UN NOUVEAU COMMENTAIRE + ENVOI DB SQL
     e.preventDefault();
 
     const data = {
@@ -53,6 +56,7 @@ const CardComment = ({ post }) => {
   };
 
   const deleteComment = async (id) => {
+    // SUPPRESSION D'UN COMMENTAIRE DANS LA DB SQL
     await Swal.fire({
       title: "Etes vous sûr?",
       text: "Vous allez supprimer ce commentaire définitivement!",

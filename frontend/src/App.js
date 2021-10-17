@@ -12,6 +12,7 @@ function App() {
     setAdmin(sessionStorage.getItem("admin"));
   }, [uid, admin]);
 
+  // PAGE APP QUI REDIRIGE VERS LA PAGE ROUTES INDEX + INITIALISATION DES DIFFERENTS CONTEXTS
   return (
     <UidContext.Provider value={uid}>
       <AdminContext.Provider value={admin}>
