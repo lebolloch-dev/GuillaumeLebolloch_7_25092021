@@ -55,8 +55,8 @@ L'application a plusieurs fonctionnalitées :
 
 - Inscription / Connexion / Déconnexion
 - Suppression de son compte
-- Affichage des posts de tout les utilisateurs
+- Affichage des posts de tous les utilisateurs
 - Afficher le profil de chaque utilisateur + ses posts postés + ses posts likés
 - Possibilité de commenter et liker les posts
-- Poster des post avec des messages et des images ou des video(youtube)
-- L'administrateur peut supprimer les posts, les commentaire et les utilisateurs souhaités
+- Poster des posts avec des messages et des images ou des videos(youtube)
+- L'administrateur peut supprimer les posts, les commentaires et les utilisateurs souhaités
