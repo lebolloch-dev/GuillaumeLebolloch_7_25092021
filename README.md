@@ -51,12 +51,12 @@ Se connecter au serveur MySql de votre choix. Exécuter la commande: CREATE DATA
 
 ## Utilisation
 
-L'application a plusieurs fonctionnalitées
+L'application a plusieurs fonctionnalitées :
 
-    * Inscription / Connexion / Déconnexion
-    * Suppression de son compte
-    * Affichage des posts de tout les utilisateurs
-    * Afficher le profil de chaque utilisateur + ses posts postés + ses posts likés
-    * Possibilité de commenter et liker les posts
-    * Poster des post avec des messages et des images ou des video(youtube)
-    * L'administrateur peut supprimer les posts, les commentaire et les utilisateurs souhaités
+- Inscription / Connexion / Déconnexion
+- Suppression de son compte
+- Affichage des posts de tout les utilisateurs
+- Afficher le profil de chaque utilisateur + ses posts postés + ses posts likés
+- Possibilité de commenter et liker les posts
+- Poster des post avec des messages et des images ou des video(youtube)
+- L'administrateur peut supprimer les posts, les commentaire et les utilisateurs souhaités
