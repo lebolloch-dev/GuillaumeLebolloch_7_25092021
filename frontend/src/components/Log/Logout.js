@@ -6,6 +6,7 @@ const Logout = () => {
     sessionStorage.removeItem("authToken");
     sessionStorage.removeItem("userID");
     sessionStorage.removeItem("pseudo");
+    sessionStorage.removeItem("admin");
 
     window.location = "/profil";
   };
