@@ -1,6 +1,6 @@
 # Groupomania
 
-Groupomania est un projet d'intranet d'entreprise destiné à améliorer la productivité et l'échange ntre les employés de l'entreprise.
+Groupomania est un projet d'intranet d'entreprise destiné à améliorer la productivité et l'échange entre les employés de l'entreprise.
 
 ## Frontend
 

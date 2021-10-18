@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue:
-          "https://i.pinimg.com/236x/fd/2c/aa/fd2caa9fd03a24a112ce4f20b51d66de.jpg",
+          "https://thumbs.dreamstime.com/b/%C3%ADcone-do-avatar-s%C3%ADmbolo-liso-isolado-no-branco-124920496.jpg",
       },
       bio: { type: DataTypes.STRING(500), allowNull: true },
       isAdmin: { type: DataTypes.STRING, allowNull: true },
